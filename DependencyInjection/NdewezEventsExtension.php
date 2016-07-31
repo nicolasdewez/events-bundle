@@ -26,23 +26,44 @@ class NdewezEventsExtension extends Extension
         $loader->load('connectors.xml');
         $loader->load('services.xml');
 
+        // Listen service
+        $container
+            ->getDefinition('ndewez.events.listen')
+            ->addArgument($config['events'])
+        ;
+
+        // Connector mock
         if (true === $config['mock']) {
             $this->setConnector($container, $container->getDefinition('ndewez.events.connector.mock'));
 
             return;
         }
 
+        if (!isset($config['connection'])) {
+            return;
+        }
+
+        // Connector synchronous
         if (ConnectorInterface::MODE_SYNCH === $config['mode']) {
             $connector = $container->getDefinition('ndewez.events.connector.http');
-            $connector->replaceArgument(0, $config['host']);
+            $connector->replaceArgument(0, $config['connection']['host']);
 
             $this->setConnector($container, $connector);
 
             return;
         }
 
-        // asynchronous
-//        $this->setConnector($container, $container->getDefinition('ndewez.events.connector.http'));
+        // Connector asynchronous
+        $connector = $container->getDefinition('ndewez.events.connector.amqp');
+        $connector
+            ->replaceArgument(0, $config['connection']['host'])
+            ->replaceArgument(1, $config['connection']['port'])
+            ->replaceArgument(2, $config['connection']['user'])
+            ->replaceArgument(3, $config['connection']['password'])
+            ->replaceArgument(4, $config['connection']['application_code'])
+        ;
+
+        $this->setConnector($container, $connector);
     }
 
     /**

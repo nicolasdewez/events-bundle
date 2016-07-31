@@ -8,6 +8,13 @@
         <service id="ndewez.events.connector.http" class="Ndewez\EventsBundle\Connector\HttpConnector" public="false">
             <argument type="string">host</argument>
         </service>
+        <service id="ndewez.events.connector.amqp" class="Ndewez\EventsBundle\Connector\AmqpConnector" public="false">
+            <argument type="string">host</argument>
+            <argument type="string">port</argument>
+            <argument type="string">user</argument>
+            <argument type="string">password</argument>
+            <argument type="string">application</argument>
+        </service>
         <service id="ndewez.events.connector.mock" class="Ndewez\EventsBundle\Connector\MockConnector" public="false" />
     </services>
 </container>

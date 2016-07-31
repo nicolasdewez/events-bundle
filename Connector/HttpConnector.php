@@ -23,7 +23,7 @@ class HttpConnector implements ConnectorInterface
     private $serializer;
 
     /**
-     * @param string              $host
+     * @param string $host
      */
     public function __construct($host)
     {

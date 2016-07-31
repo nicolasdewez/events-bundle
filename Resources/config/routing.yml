@@ -1,0 +1,5 @@
+ndewez_events:
+    path: /events/listen
+    methods: "POST"
+    defaults:
+        _controller: NdewezEventsBundle:Listen:index

@@ -5,6 +5,25 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
         <service id="ndewez.events.publisher" class="Ndewez\EventsBundle\Service\Publisher" />
+
+        <service id="ndewez.events.listen" class="Ndewez\EventsBundle\Service\Listen">
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service id="ndewez.events.param_converter.events" class="Ndewez\EventsBundle\Request\ParamConverter\EventConverter">
+            <tag name="request.param_converter" converter="exchange_payload" />
+        </service>
+
+        <service id="ndewez.events.consumer.abstract" class="Ndewez\EventsBundle\Consumer\AbstractConsumer" abstract="true">
+            <call method="setConnector">
+                <argument type="service" id="ndewez.events.connector.amqp" />
+            </call>
+        </service>
+
+        <service id="ndewez.events.consumer.event" class="Ndewez\EventsBundle\Consumer\EventConsumer" parent="ndewez.events.consumer.abstract">
+            <argument type="service" id="ndewez.events.listen" />
+        </service>
     </services>
 </container>

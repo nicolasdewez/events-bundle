@@ -28,7 +28,7 @@ class Event
      *
      * @Serializer\Type("string")
      */
-    private  $payload;
+    private $payload;
 
     /**
      * @return string

@@ -29,8 +29,8 @@ class Publisher
     }
 
     /**
-     * @param string    $title
-     * @param \StdClass $object
+     * @param string $title
+     * @param object $object
      */
     public function publish($title, $object)
     {
@@ -39,8 +39,8 @@ class Publisher
     }
 
     /**
-     * @param string    $title
-     * @param \StdClass $object
+     * @param string $title
+     * @param object $object
      *
      * @return Event
      *

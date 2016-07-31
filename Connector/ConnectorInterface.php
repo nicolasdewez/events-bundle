@@ -13,7 +13,7 @@ interface ConnectorInterface
     const MODE_ASYNCH = 'asynch';
 
     /**
-     * @param Event  $event
+     * @param Event $event
      */
     public function publish(Event $event);
 }
