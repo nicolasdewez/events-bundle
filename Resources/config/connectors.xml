@@ -6,7 +6,6 @@
 
     <services>
         <service id="ndewez.events.connector.http" class="Ndewez\EventsBundle\Connector\HttpConnector" public="false">
-            <argument type="service" id="jms_serializer" />
             <argument type="string">host</argument>
         </service>
         <service id="ndewez.events.connector.mock" class="Ndewez\EventsBundle\Connector\MockConnector" public="false" />

@@ -2,6 +2,7 @@
 
 namespace Ndewez\EventsBundle\Service;
 
+use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Ndewez\EventsBundle\Connector\ConnectorInterface;
 use Ndewez\EventsBundle\Exception\LogicException;
@@ -19,12 +20,11 @@ class Publisher
     private $serializer;
 
     /**
-     * @param SerializerInterface $serializer
      * @param ConnectorInterface  $connector
      */
-    public function __construct(SerializerInterface $serializer, ConnectorInterface $connector)
+    public function __construct(ConnectorInterface $connector)
     {
-        $this->serializer = $serializer;
+        $this->serializer = SerializerBuilder::create()->build();
         $this->connector = $connector;
     }
 

@@ -21,15 +21,20 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->booleanNode('mock')->defaultFalse()->end()
+                ->booleanNode('mock')
+                    ->defaultFalse()
+                ->end()
                 ->scalarNode('mode')
-                    ->isRequired()
                     ->validate()
                     ->ifNotInArray([ConnectorInterface::MODE_SYNCH, ConnectorInterface::MODE_ASYNCH])
                         ->thenInvalid('Invalid mode "%s"')
                     ->end()
+                    ->defaultValue(ConnectorInterface::MODE_SYNCH)
                 ->end()
-                ->scalarNode('host')->defaultNull()->end()
+                ->scalarNode('host')
+                    ->defaultValue('http://localhost')
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

@@ -2,6 +2,7 @@
 
 namespace Ndewez\EventsBundle\DependencyInjection;
 
+use Ndewez\EventsBundle\Connector\ConnectorInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -31,19 +32,23 @@ class NdewezEventsExtension extends Extension
             return;
         }
 
-        if ('synchronous' === $config['mode']) {
+        if (ConnectorInterface::MODE_SYNCH === $config['mode']) {
             $connector = $container->getDefinition('ndewez.events.connector.http');
-            $connector->replaceArgument(1, $config['host']);
+            $connector->replaceArgument(0, $config['host']);
 
             $this->setConnector($container, $connector);
 
             return;
         }
 
-        // asynchronous --> change connector
-        $this->setConnector($container, $container->getDefinition('ndewez.events.connector.http'));
+        // asynchronous
+//        $this->setConnector($container, $container->getDefinition('ndewez.events.connector.http'));
     }
 
+    /**
+     * @param ContainerBuilder $container
+     * @param Definition       $connector
+     */
     private function setConnector(ContainerBuilder $container, Definition $connector)
     {
         $container->getDefinition('ndewez.events.publisher')

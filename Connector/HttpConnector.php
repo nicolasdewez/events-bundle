@@ -4,6 +4,7 @@ namespace Ndewez\EventsBundle\Connector;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
+use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Ndewez\EventsBundle\Exception\PublishException;
 use Ndewez\EventsBundle\Model\Event;
@@ -22,13 +23,12 @@ class HttpConnector implements ConnectorInterface
     private $serializer;
 
     /**
-     * @param SerializerInterface $serializer
      * @param string              $host
      */
-    public function __construct(SerializerInterface $serializer, $host)
+    public function __construct($host)
     {
         $this->client = new Client(['base_uri' => $host]);
-        $this->serializer = $serializer;
+        $this->serializer = SerializerBuilder::create()->build();
     }
 
     /**
@@ -36,7 +36,7 @@ class HttpConnector implements ConnectorInterface
      */
     public function publish(Event $event)
     {
-        try  {
+         try  {
             $this->client->post(self::PUBLISH_URL, [
                 'body' => $this->serializer->serialize($event, 'json'),
             ]);

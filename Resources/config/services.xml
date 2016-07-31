@@ -5,8 +5,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="ndewez.events.publisher" class="Ndewez\EventsBundle\Service\Publisher">
-            <argument type="service" id="jms_serializer" />
-        </service>
+        <service id="ndewez.events.publisher" class="Ndewez\EventsBundle\Service\Publisher" />
     </services>
 </container>
