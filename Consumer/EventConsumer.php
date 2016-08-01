@@ -5,7 +5,7 @@ namespace Ndewez\EventsBundle\Consumer;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Ndewez\EventsBundle\Model\Event;
-use Ndewez\EventsBundle\Service\Listen;
+use Ndewez\EventsBundle\Service\Listener;
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
@@ -13,16 +13,16 @@ use PhpAmqpLib\Message\AMQPMessage;
  */
 class EventConsumer extends AbstractConsumer
 {
-    /** @var Listen */
+    /** @var Listener */
     private $listen;
 
     /** @var SerializerInterface */
     private $serializer;
 
     /**
-     * @param Listen $listen
+     * @param Listener $listen
      */
-    public function __construct(Listen $listen)
+    public function __construct(Listener $listen)
     {
         $this->listen = $listen;
         $this->serializer = SerializerBuilder::create()->build();

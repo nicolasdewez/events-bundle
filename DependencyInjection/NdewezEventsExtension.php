@@ -28,7 +28,7 @@ class NdewezEventsExtension extends Extension
 
         // Listen service
         $container
-            ->getDefinition('ndewez.events.listen')
+            ->getDefinition('ndewez.events.listener')
             ->addArgument($config['events'])
         ;
 

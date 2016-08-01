@@ -8,7 +8,7 @@
 
         <service id="ndewez.events.publisher" class="Ndewez\EventsBundle\Service\Publisher" />
 
-        <service id="ndewez.events.listen" class="Ndewez\EventsBundle\Service\Listen">
+        <service id="ndewez.events.listener" class="Ndewez\EventsBundle\Service\Listener">
             <argument type="service" id="event_dispatcher" />
         </service>
 
@@ -23,7 +23,7 @@
         </service>
 
         <service id="ndewez.events.consumer.event" class="Ndewez\EventsBundle\Consumer\EventConsumer" parent="ndewez.events.consumer.abstract">
-            <argument type="service" id="ndewez.events.listen" />
+            <argument type="service" id="ndewez.events.listener" />
         </service>
     </services>
 </container>

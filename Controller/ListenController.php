@@ -21,7 +21,7 @@ class ListenController extends Controller
      */
     public function indexAction(Event $event)
     {
-        $this->get('ndewez.events.listen')->listen($event);
+        $this->get('ndewez.events.listener')->listen($event);
 
         return new Response();
     }

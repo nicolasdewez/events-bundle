@@ -11,7 +11,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * Class Listen.
  */
-class Listen
+class Listener
 {
     /** @var EventDispatcherInterface */
     private $dispatcher;
