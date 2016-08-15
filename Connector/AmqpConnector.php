@@ -4,6 +4,8 @@ namespace Ndewez\EventsBundle\Connector;
 
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
+use Ndewez\EventsBundle\Exception\ListenException;
+use Ndewez\EventsBundle\Exception\PublishException;
 use Ndewez\EventsBundle\Model\Event;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Exception\AMQPExceptionInterface;
@@ -81,7 +83,7 @@ class AmqpConnector implements AmqpConnectorInterface
 
             $channel->close();
         } catch (AMQPExceptionInterface $exception) {
-//            throw new SendException($exception->getMessage());
+            throw new PublishException($exception->getMessage());
         }
     }
 
@@ -114,7 +116,7 @@ class AmqpConnector implements AmqpConnectorInterface
                 $channel->wait();
             }
         } catch (AMQPExceptionInterface $exception) {
-//            throw new ListenException($exception->getMessage());
+            throw new ListenException($exception->getMessage());
         }
     }
 

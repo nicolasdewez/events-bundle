@@ -2,8 +2,6 @@
 
 namespace Ndewez\EventsBundle\Connector;
 
-use GuzzleHttp\Client;
-use JMS\Serializer\SerializerInterface;
 use Ndewez\EventsBundle\Model\Event;
 
 /**

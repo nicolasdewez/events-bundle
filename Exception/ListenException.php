@@ -2,6 +2,6 @@
 
 namespace Ndewez\EventsBundle\Exception;
 
-class LogicException extends EventsBundleException
+class ListenException extends EventsBundleException
 {
 }
